@@ -32,3 +32,6 @@ Route::get("/test2/{id?}", function () {
 Route::get("/test3", function () {
     return "Hello Ibrahem IN Your Project";
 })->name("test-name");
+
+
+Route::view("/hello/{name}", 'welcome', ['name' => 'hema']);
