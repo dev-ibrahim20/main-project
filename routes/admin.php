@@ -13,16 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/", function () {
-    $obj = [];
-    $obj["id"] = "5";
-    $obj["name"] = "Ibrahem";
-    $obj["age"] = 25;
-    return view("layout")->with(["id" => '5', "name" => 'Ibrahem', 'age' => '25']);
+Route::get('/admin', function () {
+    return "hello Admin";
 });
-Route::get("/landing", function () {
-    return view("landing");
-});
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

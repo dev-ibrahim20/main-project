@@ -22,14 +22,17 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
-                    <a href="{{ route('test-name') }}">Try me</a>
+                    <a href="#">Try me</a>
                 </nav>
             </div>
         </div>
     </div>
+    <h1>{{ __('messages.welcome') }}</h1>
+    {{-- <p>Your Id is:- {{ $obj->id }}</p> --}}
 
-
+    @if ($name == 'Ibrahem')
+        <p>Hello {{ $name }} your id = {{ $id }} && age = {{ $age }}</p>
+    @endif
 </body>
 
 </html>
