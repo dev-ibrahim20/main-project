@@ -39,7 +39,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
         Route::get('/index', [CrudController::class,'index'])->name('offers.index');
         Route::get('/create', [CrudController::class, 'create'])->name('offers.create');
         Route::post('/store', [CrudController::class, 'store'])->name('offers.store');
-        
+        Route::get('/edit/{id}', [CrudController::class, 'edit'])->name('offers.edit');
+        Route::post('/update/{id}', [CrudController::class, 'update'])->name('offers.update');
+        Route::get('/delete/{id}', [CrudController::class, 'destroy'])->name('offers.destroy');
+        Route::get('/youtube', [CrudController::class, 'getViews'])->name('getViews')->middleware('verified');
     }); 
-   
+
 });

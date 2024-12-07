@@ -20,6 +20,7 @@
                     <th scope="col">{{__('messages.offer name')}}</th>
                     <th scope="col">{{__('messages.offer price')}}</th>
                     <th scope="col">{{__('messages.offer details')}}</th>
+                    <th scope="col">{{__('messages.offer photo')}}</th>
                     <th scope="col">{{__('messages.Control')}}</th>
 
                 </tr>
@@ -31,9 +32,10 @@
                         <td>{{$offer->name}}</td>
                         <td>{{$offer->price}}</td>
                         <td>{{$offer->details}}</td>
+                        <td><img src="{{asset('images/offers/'.$offer->photo)}}" alt="" style="width: 200px"></td>
                         <td>
-                            <a href="#" class="btn btn-primary">{{__('messages.Edit')}}</a>
-                            <a href="#" class="btn btn-danger">{{__('messages.Delete')}}</a>
+                            <a href="{{route('offers.edit', $offer->id)}}" class="btn btn-primary">{{__('messages.Edit')}}</a>
+                            <a href="{{route('offers.destroy', $offer->id)}}" class="btn btn-danger">{{__('messages.Delete')}}</a>
                         </td>
                     </tr>
                     @endforeach

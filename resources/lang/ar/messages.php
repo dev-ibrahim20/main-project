@@ -22,4 +22,6 @@ return [
     "Offer Details en"=> "تفاصيل العرض بالانجليزية",
     "Submit"=> "إضافة",
     "success_create" => "تم اضافة العرض بنجاح",
+    "success_update" => "تم تعديل العرض بنجاح",
+    "offer photo"=> "صورة العرض",
 ];

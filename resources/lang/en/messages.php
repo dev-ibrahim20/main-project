@@ -18,6 +18,8 @@ return [
     "Price"=> "Price",
     "Offer Details ar"=> "Offer Details ar",
     "Offer Details en"=> "Offer Details en",
-    "Submit"=> "ٍSubmit",
+    "Submit"=> "Submit",
     "success_create" => "Offer Created Successfully",
+    "success_update"=> "Offer Updated Successfully",
+    "offer photo"=> "Offer photo",
 ];

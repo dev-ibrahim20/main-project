@@ -10,7 +10,7 @@
     <title>Document</title>
 </head>
 
-<body>
+<body style="height: 1000px; margin-top: 200px">
     {{--Start Header Code--}}
     @include('includes.header')
     {{-- End Header Code --}}
@@ -27,48 +27,43 @@
                 {{Session::get('success')}}
             </div>
         @endif
+        
         {{-- Start Form Create --}}
-        <form action="{{route('offers.store')}}" method="POST" style="margin-top: 180px" enctype="multipart/form-data">
+        <form action="{{route('offers.update', $offer->id)}}" method="POST" style="margin-top: 180px">
             {{-- <input type="text" name="_token" value="{{ csrf_token() }}"> --}}
             @csrf
-            <div class="form-group">
-                <label for="exampleInputOffer">{{__('messages.offer photo')}}</label>
-                <input type="file" name="image" class="form-control" id="exampleInputOffer" aria-describedby="OfferHelp" placeholder="Enter Your Offer Photo">
-                @error('photo')
-                <small id="OfferHelp" class="form-text text-danger">{{$message}}</small>    
-                @enderror
-            </div>
+            <h1 style="color: green">Edit Offer</h1>
             <div class="form-group">
                 <label for="exampleInputOffer">{{__('messages.Offer Name ar')}}</label>
-                <input type="text" name="name_ar" class="form-control" id="exampleInputOffer" aria-describedby="OfferHelp" placeholder="Enter Your Offer Name">
+                <input type="text" name="name_ar" class="form-control" id="exampleInputOffer" aria-describedby="OfferHelp" placeholder="Enter Your Offer Name" value="{{$offer->name_ar}}">
                 @error('name_ar')
                 <small id="OfferHelp" class="form-text text-danger">{{$message}}</small>    
                 @enderror
             </div>
             <div class="form-group">
                 <label for="exampleInputOffer">{{__('messages.Offer Name en')}}</label>
-                <input type="text" name="name_en" class="form-control" id="exampleInputOffer" aria-describedby="OfferHelp" placeholder="Enter Your Offer Name">
+                <input type="text" name="name_en" class="form-control" id="exampleInputOffer" aria-describedby="OfferHelp" placeholder="Enter Your Offer Name" value="{{$offer->name_en}}">
                 @error('name_en')
                 <small id="OfferHelp" class="form-text text-danger">{{$message}}</small>    
                 @enderror
             </div>
             <div class="form-group">
                 <label for="exampleInputPrice">{{__('messages.Price')}}</label>
-                <input type="text" name="price" class="form-control" id="exampleInputPrice" aria-describedby="priceHelp" placeholder="Enter Your Price">
+                <input type="text" name="price" class="form-control" id="exampleInputPrice" aria-describedby="priceHelp" placeholder="Enter Your Price" value="{{$offer->price}}">
                 @error('price')
                 <small id="priceHelp" class="form-text text-danger">{{$message}}</small>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="exampleInputDetails">{{__('messages.Offer Details ar')}}</label>
-                <textarea type="text" name="details_ar" class="form-control" id="exampleInputDetails" aria-describedby="detailsHelp" placeholder="Enter YourDetails"></textarea>
+                <textarea type="text" name="details_ar" class="form-control" id="exampleInputDetails" aria-describedby="detailsHelp" placeholder="Enter YourDetails">{{$offer->details_ar}}</textarea>
                 @error('details_ar')
                 <small id="detailsHelp" class="form-text text-danger">{{$message}}</small>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="exampleInputDetails">{{__('messages.Offer Details en')}}</label>
-                <textarea type="text" name="details_en" class="form-control" id="exampleInputDetails" aria-describedby="detailsHelp" placeholder="Enter YourDetails"></textarea>
+                <textarea type="text" name="details_en" class="form-control" id="exampleInputDetails" aria-describedby="detailsHelp" placeholder="Enter YourDetails">{{$offer->details_en}}</textarea>
                 @error('details_en')
                 <small id="detailsHelp" class="form-text text-danger">{{$message}}</small>
                 @enderror
