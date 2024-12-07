@@ -2,9 +2,7 @@
 
 use App\Http\Controllers\CrudController;
 use Illuminate\Support\Facades\Route;
-
-
-
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get("/", function () {
-    $obj = [];
-    $obj["id"] = "5";
-    $obj["name"] = "Ibrahem";
-    $obj["age"] = 25;
-    return view("layout")->with(["id" => '5', "name" => 'Ibrahem', 'age' => '25']);
+    return view("layout");
 });
+
 Route::get("/landing", function () {
     return view("landing");
 });
@@ -38,7 +33,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/fillable', [CrudController::class, 'getOffers']);
 
-Route::group(['prefix' => 'offers'], function () {
-    Route::get('/create', [CrudController::class, 'create'])->name('offers.create');
-    Route::post('/store', [CrudController::class, 'store'])->name('offers.store');
+
+Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function () {
+    Route::group(['prefix' => 'offers'], function () {
+        Route::get('/index', [CrudController::class,'index'])->name('offers.index');
+        Route::get('/create', [CrudController::class, 'create'])->name('offers.create');
+        Route::post('/store', [CrudController::class, 'store'])->name('offers.store');
+        
+    }); 
+   
 });

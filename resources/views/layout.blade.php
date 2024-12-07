@@ -28,11 +28,6 @@
         </div>
     </div>
     <h1>{{ __('messages.welcome') }}</h1>
-    {{-- <p>Your Id is:- {{ $obj->id }}</p> --}}
-
-    @if ($name == 'Ibrahem')
-        <p>Hello {{ $name }} your id = {{ $id }} && age = {{ $age }}</p>
-    @endif
 </body>
 
 </html>

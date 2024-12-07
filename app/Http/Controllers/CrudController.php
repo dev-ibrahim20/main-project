@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OfferRequest;
 use App\Models\Offer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class CrudController extends Controller
 {
@@ -12,9 +14,14 @@ class CrudController extends Controller
     public function __construct() {
         
     }
-    public function getOffers()
+    public function index()
     {
-        return Offer::get();
+        $offers = Offer::select(
+            'id',
+                     'price',
+                     'name_'.LaravelLocalization::getCurrentLocale().' as name',
+                    'details_'.LaravelLocalization::getCurrentLocale().' as details')->get();
+        return view("offers.index", compact('offers'));
     }
 
     public function create()
@@ -22,47 +29,18 @@ class CrudController extends Controller
         return view("offers.create");
     }
 
-    public function store(Request $Request) 
+    public function store(OfferRequest $Request) 
     {
-        $message = $this->getMessage();
-        $rules = $this->getRules();
-        // validate data in request
-        $validator = Validator::make($Request->all(),$rules, $message);
-        if ($validator->fails()) {
-            return redirect()->route('offers.create')->withErrors($validator)->withInput(request()->all());
-        }
-        else{
             // insert data in database
             Offer::create([
-                'name' => $Request->name,
+                'name_ar' => $Request->name_ar,
+                'name_en' => $Request->name_en,
                 'price' => $Request->price,
-                'details'=> $Request->details,
+                'details_ar'=> $Request->details_ar,
+                'details_en'=> $Request->details_en,
             ]);
-            return redirect()->back()->with('success','Offer Created Successfully');
-        }
-    }
-    protected function getMessage()
-    {
-        return $message = [
-        'name.required' => 'Offer name is required',
-        'name.string' => 'Offer name must be string',
-        'name.max' => 'Offer name must be less than 100 characters',
-        'name.unique' => 'Offer name must be unique',
-        'price.required' => 'Offer price is required',
-        'price.numeric'=> 'Offer price must be numeric',
-        'price.min' => 'Offer price must be greater than 0',
-        'details.required' => 'Offer details is required',
-        'details.string'=> 'Offer details must be string',
-        'details.max' => 'Offer details must be less than 1000 characters',
-        ];
+            return redirect()->back()->with('success_create',__('messages.success_create'));
     }
 
-    protected function getRules()
-    {
-        return $rules = [
-            'name' => 'required|string|max:100|unique:offers,name',
-            'price' => 'required|numeric|min:0',
-            'details' => 'required|string|max:1000',
-        ];
-    }
+
 }
