@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OfferRequest;
 use \App\Traits\ImageSaveTrait;
 use Illuminate\Http\Request;
 use App\Models\Offer;
@@ -9,7 +10,7 @@ class OfferController extends Controller
 {
     use ImageSaveTrait;
 
-    public function index(Request $request)
+    public function index()
     {
 
         $offers = Offer::get();
@@ -23,7 +24,7 @@ class OfferController extends Controller
          return view('ajaxoffer.create');
     }
 
-    public function store(Request $Request)
+    public function store(OfferRequest $Request)
     {
         // Save this offer into DB using AJax
 
@@ -72,7 +73,7 @@ class OfferController extends Controller
     }
 
 
-    public function update(Request $request)
+    public function update(OfferRequest $request)
     {
         
        $offer = Offer::findOrFail($request->offer_id);

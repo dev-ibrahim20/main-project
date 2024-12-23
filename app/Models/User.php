@@ -50,7 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
     #################### relations ####################
      public function phone()
      {
-        return $this->hasOne(Phone::class, 'user_id');
+        return $this->hasOne(Phone::class, 'user_id', 'id');
      }
 
 }

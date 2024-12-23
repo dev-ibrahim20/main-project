@@ -79,17 +79,25 @@ Route::get('/admin/login', [CustomAuthController::class,'login'])->name('admin.l
 Route::post('/admin/login/check', [CustomAuthController::class,'check'])->name('save.admin.login');
 
 
-
-
-
-
-
-
-
 ##################### relation ###################
+
+// one To one
 Route::get('has-one', [RelationsController::class,'hasOneRelation'])->name('has-one');
 Route::get('has-one-reverse', [RelationsController::class,'hasOndeRelationRverse'])->name('has-one-reverse');
 Route::get('get-user-has-phone', [RelationsController::class,'getUserHasPhone'])->name('get-has-phone');
 
+// one To many
+Route::get('hospital-has-many', [RelationsController::class, 'getHospitalDoctors'])->name('has-many');
 
-// $user =\App\User::find(2);
+Route::get('hospital', [RelationsController::class,'hospital'])->name('hospital');
+Route::get('doctors/{hospital_id}', [RelationsController::class,'doctor'])->name('doctors');
+
+Route::get('get-hospital-doctors', [RelationsController::class,'hospitalHasDoctor'])->name('get-hospital-doctors');
+Route::get('get-hospital-not-doctors', [RelationsController::class,'hospitalHasnotDoctor'])->name('get-hospital-not-doctors');
+
+
+// many To many
+Route::get('doctors_services', [RelationsController::class,'getDoctorsServices'])->name('get-doctors-services');
+Route::get('services_doctors', [RelationsController::class,'getServicesDoctors'])->name('get-services-doctors');
+
+Route::get('doctors/services/{doctor_id}', [RelationsController::class,'DoctorServices'])->name('doctors-services');
